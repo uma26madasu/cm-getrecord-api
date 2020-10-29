@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:file="http://www.mulesoft.org/schema/mule/file"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/file http://www.mulesoft.org/schema/mule/file/current/mule-file.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<flow name="read_Records_from_CSV" doc:id="9d530ee2-219c-4e7a-9744-7d7889c5a946" >
+		<set-variable value='#[output application/java --- p("mule.home") ++ "\\" ++ p("fileName") ++ "-" ++ p("mule.env") ++ ".csv"]' doc:name="path" doc:id="8a7c89fa-895a-41f1-bcef-7f01e499fd0e" variableName="path"/>
+		<file:read doc:name="Read" doc:id="b51cc6cf-ecce-4d23-a289-2aa558c66370" path="#[vars.path]" />
+		<ee:transform doc:name="Response transformation" doc:id="f365ec89-8656-4963-8f64-a2b6287e2d52" >
+			<ee:message >
+				<ee:set-payload resource="dataweaves/responseTransfromation.dwl" />
+			</ee:message>
+		</ee:transform>
+		<logger level="INFO" doc:name="Logger" doc:id="5b1fbc29-2079-4ecd-8604-bd7efa6908d8" message="#[payload]" />
+		<error-handler >
+			<on-error-propagate enableNotifications="true" logException="true" doc:name="On Error Propagate" doc:id="2f9f2e6c-13eb-4d16-a4e4-19d9162740d4" type="FILE:ILLEGAL_PATH" >
+				<ee:transform doc:name="Error Message" doc:id="6b6c05e1-ea9b-46b8-a7cb-9b7b812255c6" >
+					<ee:message >
+						<ee:set-payload resource="dataweaves/file_not_found_error.dwl" />
+					</ee:message>
+					<ee:variables >
+						<ee:set-variable variableName="httpStatus" ><![CDATA[%dw 2.0
+output application/java
+---
+404]]></ee:set-variable>
+					</ee:variables>
+				</ee:transform>
+			</on-error-propagate>
+		</error-handler>
+	</flow>
+</mule>

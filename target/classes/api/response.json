@@ -1,0 +1,16 @@
+{
+    "CSV_data": [
+        {
+            "Client Key": "1bbc2682-7845-4ea0-896f-f682f232a988",
+            "First Name": "Uma",
+            "Middle Name": "Rao",
+            "Last Name": "Madasu",
+            "Birth Date": "1992-12-24",
+            "Height": 10.5,
+            "Weight": "160lbs",
+            "Billing Address": "2337 , promenade blvd , Montgomery , 36106 , USA",
+            "Created Date": "2020-10-22"
+        }
+    ],
+    "totalRecords": 1
+}

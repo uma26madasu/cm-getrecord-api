@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:munit="http://www.mulesoft.org/schema/mule/munit" xmlns:munit-tools="http://www.mulesoft.org/schema/mule/munit-tools"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xsi:schemaLocation="
+		http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+		http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd
+		http://www.mulesoft.org/schema/mule/munit-tools  http://www.mulesoft.org/schema/mule/munit-tools/current/mule-munit-tools.xsd">
+	<munit:config name="new-test-suite.xml" />
+	<munit:test
+		name="new-test-suite-cm-getrecords-api-mainTest-500-UNKNOWN"
+		doc:id="802783e7-9a9a-45cc-8d31-ee1173b228da" description="Test" expectedErrorType="APIKIT:ANY">
+		<munit:behavior>
+			<munit-tools:mock-when
+				doc:name="Mock when APIKIT"
+				doc:id="811436c1-7f3f-4715-b92d-363a581d3aa3"
+				processor="apikit:router">
+				<munit-tools:with-attributes>
+					<munit-tools:with-attribute
+						whereValue="cm-getrecords-api-config" attributeName="config-ref" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:error typeId="#['APIKIT:ANY']" />
+					<munit-tools:variables >
+						<munit-tools:variable key="httpStatus" value="#[500]" />
+					</munit-tools:variables>
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to cm-getrecords-api-main" doc:id="072bd465-b1ba-4873-9970-bc64b56ab618" name="cm-getrecords-api-main"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert-equals doc:name="Assert equals" doc:id="9da6151f-b565-403f-984a-17dbbb89c5a8" actual="#[vars.httpStatus]" expected="#[500]"/>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="new-test-suite-cm-getrecords-api-mainTest-404-NOT_FOUND" doc:id="0682161f-24c3-4849-ba42-24f2d45c7adc" description="Test" expectedErrorType="APIKIT:NOT_FOUND">
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock when APIKIT" doc:id="d59e0338-a8d5-4ceb-b147-7754e0f7b782" processor="apikit:router">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="cm-getrecords-api-config" attributeName="config-ref" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:error typeId='#["APIKIT:NOT_FOUND"]' />
+					<munit-tools:variables >
+						<munit-tools:variable key="httpStatus" value="#[404]" />
+					</munit-tools:variables>
+				</munit-tools:then-return>
+			
+</munit-tools:mock-when>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to cm-getrecords-api-main" doc:id="03a00175-df3a-4c4c-a96c-5adfa9a4eba9" name="cm-getrecords-api-main"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert-equals doc:name="Assert equals" doc:id="caf93316-e1f9-4a58-9e69-03107a10e12b" actual="#[vars.httpStatus]" expected="#[404]"/>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="new-test-suite-cm-getrecords-api-mainTest-405-METHOD_NOT_ALLOWED" doc:id="6fc90d80-f48a-4c7e-8b4c-c2ab8db518b9" description="Test" expectedErrorType="APIKIT:METHOD_NOT_ALLOWED">
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock when APIKIT" doc:id="6ba04aae-9a00-4ea3-aa20-d963322e38f9" processor="apikit:router">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="cm-getrecords-api-config" attributeName="config-ref" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:error typeId='#["APIKIT:METHOD_NOT_ALLOWED"]' />
+					<munit-tools:variables >
+						<munit-tools:variable key="httpStatus" value="#[405]" />
+					</munit-tools:variables>
+				</munit-tools:then-return>
+			
+</munit-tools:mock-when>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to cm-getrecords-api-main" doc:id="aa705e2b-edda-435c-92ca-2baf5f531591" name="cm-getrecords-api-main"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert-equals doc:name="Assert equals" doc:id="eff21e96-f571-4467-a914-12177be3fa0f" actual="#[vars.httpStatus]" expected="#[405]"/>
+		</munit:validation>
+	</munit:test>
+	
+	<munit:test name="new-test-suite-cm-getrecords-api-mainTest-501-NOT_IMPLEMENTED" doc:id="03c50881-d17d-47c2-a24e-5148f3f3f5db" description="Test" expectedErrorType="APIKIT:NOT_IMPLEMENTED">
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock when APIKIT" doc:id="3e1ba262-8150-498f-ac82-74bb1f08e274" processor="apikit:router">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="cm-getrecords-api-config" attributeName="config-ref" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:error typeId='#["APIKIT:NOT_IMPLEMENTED"]' />
+					<munit-tools:variables >
+						<munit-tools:variable key="httpStatus" value="#[401]" />
+					</munit-tools:variables>
+				</munit-tools:then-return>
+			
+</munit-tools:mock-when>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to cm-getrecords-api-main" doc:id="8a735574-cff9-4e5d-b90b-934c828ec59c" name="cm-getrecords-api-main"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert-equals doc:name="Assert equals" doc:id="46ac0809-53c1-4df5-95bc-607f5a059103" actual="#[vars.httpStatus]" expected="#[501]"/>
+		</munit:validation>
+	</munit:test>
+	
+	<munit:test name="new-test-suite-cm-getrecords-api-mainTest-400-BAD_REQUEST" doc:id="5583dd34-d17f-4656-b20e-a0886aec8ff2" description="Test" expectedErrorType="APIKIT:BAD_REQUEST">
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock when APIKIT" doc:id="eed0881a-89ba-4a75-9c17-025ded1318d8" processor="apikit:router">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="cm-getrecords-api-config" attributeName="config-ref" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:error typeId='#["APIKIT:BAD_REQUEST"]' />
+					<munit-tools:variables >
+						<munit-tools:variable key="httpStatus" value="#[400]" />
+					</munit-tools:variables>
+				</munit-tools:then-return>
+			
+</munit-tools:mock-when>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to cm-getrecords-api-main" doc:id="0bbafa14-863e-4a18-93f2-be229621345e" name="cm-getrecords-api-main"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert-equals doc:name="Assert equals" doc:id="50ea6455-f654-4477-bf0d-b1eaad6db7a5" actual="#[vars.httpStatus]" expected="#[400]"/>
+		</munit:validation>
+	</munit:test>
+	
+	<munit:test name="new-test-suite-cm-getrecords-api-mainTest-415-UNSUPPORTED_MEDIA_TYPE" doc:id="5956c758-b6fa-4bfd-ab9f-bdb92ba76f5c" description="Test" expectedErrorType="APIKIT:UNSUPPORTED_MEDIA_TYPE">
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock when APIKIT" doc:id="c151e680-b07b-485a-8d7a-67798b33d5cc" processor="apikit:router">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="cm-getrecords-api-config" attributeName="config-ref" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:error typeId='#["APIKIT:UNSUPPORTED_MEDIA_TYPE"]' />
+					<munit-tools:variables >
+						<munit-tools:variable key="httpStatus" value="#[415]" />
+					</munit-tools:variables>
+				</munit-tools:then-return>
+			
+</munit-tools:mock-when>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to cm-getrecords-api-main" doc:id="558aa106-97c1-492c-8b7f-14bd8e07a16a" name="cm-getrecords-api-main"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert-equals doc:name="Assert equals" doc:id="800603e0-0b83-4151-ac85-5a764f6608cf" actual="#[vars.httpStatus]" expected="#[415]"/>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="new-test-suite-cm-getrecords-api-mainTest-406-NOT_ACCEPTABLE" doc:id="5940656f-a121-4905-98d2-f80fd42e9c63" description="Test" expectedErrorType="APIKIT:NOT_ACCEPTABLE">
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock when APIKIT" doc:id="b922de91-21c9-4db1-a708-49b6078ec231" processor="apikit:router">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="cm-getrecords-api-config" attributeName="config-ref" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:error typeId='#["APIKIT:NOT_ACCEPTABLE"]' />
+					<munit-tools:variables >
+						<munit-tools:variable key="httpStatus" value="#[406]" />
+					</munit-tools:variables>
+				</munit-tools:then-return>
+			
+</munit-tools:mock-when>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to cm-getrecords-api-main" doc:id="a18f795f-7a17-4aa1-b312-120a24be1dbe" name="cm-getrecords-api-main"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert-equals doc:name="Assert equals" doc:id="a5a22df6-2a4e-481f-b67c-79c6e20c2801" actual="#[vars.httpStatus]" expected="#[406]"/>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="new-test-suite-get:\getRecords:cm-getrecords-api-configTest" doc:id="efcf9844-d9ad-4e47-83af-d3bb772dd6c4" description="Test">
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock when Read" doc:id="36dd16f0-9839-4430-a26d-97fcd5d59dae" processor="file:read">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="b51cc6cf-ecce-4d23-a289-2aa558c66370" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:payload value='#[output application/csv
+---
+[
+    {
+      "Client Key": "17944757-3e3f-4ee4-8929-5d470c80d670",
+      "First Name": "Uma",
+      "Middle Name": "Rao",
+      "Last Name": "Madasu",
+      "Birth Date": "725155200",
+      "Height": "10.5",
+      "Weight": "160lbs",
+      "Billing Street": "2337",
+      "Billing City": "promenade blvd",
+      "Billing State": "Montgomery",
+      "Billing Postal Code": "36106",
+      "Billing Country": "USA",
+      "Created Date": "1602979200"
+    }
+  ]
+]' mediaType="application/csv" />
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to get:\getRecords:cm-getrecords-api-config" doc:id="5502e73b-17f6-45d0-a882-7349f1778a9d" name="get:\getRecords:cm-getrecords-api-config"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert-that doc:name="Assert that" doc:id="fc32b1db-3a7d-4856-9ebf-31c6fdac99ab" expression="#[payload]" is="#[MunitTools::notNullValue()]"/>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="new-test-suite-get:\getRecords:cm-getrecords-api-configTest_Error" doc:id="ffbef370-bd70-45aa-84ad-ea42a4bfeb88" description="Test" expectedErrorType="FILE:ILLEGAL_PATH">
+			<munit:behavior>
+				<munit-tools:mock-when doc:name="Mock when Read" doc:id="7954886c-c6ae-4ae2-b50f-701d7784832b" processor="file:read">
+					<munit-tools:with-attributes>
+						<munit-tools:with-attribute whereValue="b51cc6cf-ecce-4d23-a289-2aa558c66370" attributeName="doc:id" />
+					</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:error typeId="#['FILE:ILLEGAL_PATH']" />
+					<munit-tools:variables >
+						<munit-tools:variable key="httpStatus" value="#[404]" />
+					</munit-tools:variables>
+				</munit-tools:then-return>
+					
+				</munit-tools:mock-when>
+			</munit:behavior>
+			<munit:execution>
+				<flow-ref doc:name="Flow-ref to get:\getRecords:cm-getrecords-api-config" doc:id="0aa4a836-f821-4b92-9cf4-9ed5a1bdf290" name="get:\getRecords:cm-getrecords-api-config" />
+			</munit:execution>
+			<munit:validation>
+				<munit-tools:assert-that doc:name="Assert that" doc:id="42219afd-32d3-409a-ba88-7e869ea7636f" expression="#[vars.httpStatus]" is="#[MunitTools::equalTo(404)]" />
+			</munit:validation>
+		</munit:test>
+
+
+</mule>

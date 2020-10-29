@@ -1,0 +1,34 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<types:mule xmlns:types="http://www.mulesoft.org/schema/mule/types">
+  <types:catalog>
+    <types:type name="Response" format="csv">
+      <types:shape format="weave" example="examples/Customers-QA.csv"><![CDATA[%dw 2.0
+
+type Response = Array<{|  "Client Key": String,   "First Name": String,   "Middle Name": String,   "Last Name": String,   "Birth Date": String,   Height: String,   Weight: String,   "Billing Street": String,   "Billing City": String,   "Billing State": String,   "Billing Postal Code": String,   "Billing Country": String,   "Created Date": String|}>
+
+]]></types:shape>
+      <types:properties>
+        <types:property name="headerLineNumber" value="0"/>
+        <types:property name="header" value="true"/>
+        <types:property name="isQuotedString" value="false"/>
+        <types:property name="separator" value=","/>
+      </types:properties>
+    </types:type>
+    <types:type name="sample" format="json">
+      <types:shape format="weave" example="examples/new 8.json"><![CDATA[%dw 2.0
+
+type sample = Array<{|  "Client Key": String,   "First Name": String,   "Middle Name": String,   "Last Name": String,   "Birth Date": String,   Height: String,   Weight: String,   "Billing Street": String,   "Billing City": String,   "Billing State": String,   "Billing Postal Code": String,   "Billing Country": String,   "Created Date": String|}> {"example": "[{\\\"Client Key\\\":\\\"17944757-3e3f-4ee4-8929-5d470c80d670\\\",\\\"First Name\\\":\\\"Uma\\\",\\\"Middle Name\\\":\\\"Rao\\\",\\\"Last Name\\\":\\\"Madasu\\\",\\\"Birth Date\\\":\\\"725155200\\\",\\\"Height\\\":\\\"10.5\\\",\\\"Weight\\\":\\\"160lbs\\\",\\\"Billing Street\\\":\\\"2337\\\",\\\"Billing City\\\":\\\"promenade blvd\\\",\\\"Billing State\\\":\\\"Montgomery\\\",\\\"Billing Postal Code\\\":\\\"36106\\\",\\\"Billing Country\\\":\\\"USA\\\",\\\"Created Date\\\":\\\"1602979200\\\"}]"}
+
+]]></types:shape>
+    </types:type>
+  </types:catalog>
+  <types:enrichment select="#f365ec89-8656-4963-8f64-a2b6287e2d52">
+    <types:processor-declaration>
+      <types:input-event>
+        <types:message>
+          <types:payload type="sample"/>
+        </types:message>
+      </types:input-event>
+    </types:processor-declaration>
+  </types:enrichment>
+</types:mule>

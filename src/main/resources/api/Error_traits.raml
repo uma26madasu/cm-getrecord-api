@@ -1,0 +1,62 @@
+#%RAML 1.0 Trait
+responses:
+  400:
+    description: |
+      The request could not be understood by the server due to malformed syntax.
+    body:
+      application/json:
+        example:
+          {
+            "Status" : "Error",
+            "Message" : "Bad request"
+          }
+  404:
+    description: |
+      The server has not found anything matching the request URI.
+    body:
+      application/json:
+        example:
+          {
+            "Status" : "Error",
+            "Message" : "File Not Found"
+          }
+  401:
+    description: |
+      The request requires user authentication.
+    body:
+      application/json:
+        example:
+          {
+            "Status" : "Error",
+            "Message" : "Unauthorized Access"
+          }
+  405:
+    description: |
+      The method specified in the request is not allowed.
+    body:
+      application/json:
+        example:
+          {
+            "Status" : "Error",
+            "Message" : "Method not allowed"
+          }
+  415:
+    description: |
+      The requested format is not supported by the requested resource for the requested method.
+    body:
+      application/json:
+        example:
+          {
+            "Status" : "Error",
+            "Message" : "Unsupported Media Type"
+          }
+  500:
+    description: |
+      The server encountered an unexpected condition.
+    body:
+      application/json:
+        example:
+          {
+            "Status" : "Error",
+            "Message" : "Internal Server Error"
+          }
